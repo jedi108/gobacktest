@@ -5,6 +5,11 @@ package backtest
 // used after calculations to format
 const DP = 4 // DP
 
+// Reseter provides a reseting interface for the backtest.
+type Reseter interface {
+	Reset()
+}
+
 // Test is a basic back test struct
 type Test struct {
 	symbols    []string
@@ -150,9 +155,4 @@ func (t *Test) eventLoop(e EventHandler) error {
 	}
 
 	return nil
-}
-
-// Reseter provides a resting interface.
-type Reseter interface {
-	Reset()
 }

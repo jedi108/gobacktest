@@ -32,20 +32,22 @@ type Investor interface {
 	IsShort(string) (Position, bool)
 }
 
-// Updater handles the updating of the portfolio on data events
+// Updater handles the updating of the portfolio on data events.
 type Updater interface {
 	Update(DataEventHandler)
 }
 
-// Casher handles basic portolio info
+// Casher handles the use of cash within the portolio.
 type Casher interface {
 	SetInitialCash(float64)
 	InitialCash() float64
 	SetCash(float64)
 	Cash() float64
+	DepositCash(float64)
+	WithdrawCash(float64) bool
 }
 
-// Valuer returns the values of the portfolio
+// Valuer returns the values of the portfolio.
 type Valuer interface {
 	Value() float64
 }
@@ -197,6 +199,27 @@ func (p *Portfolio) SetCash(cash float64) {
 // Cash returns the current cash value of the portfolio
 func (p Portfolio) Cash() float64 {
 	return p.cash
+}
+
+// DepositCash implements the withdrawing cash function.
+func (p *Portfolio) DepositCash(cash float64) {
+	if cash < 0 {
+		return
+	}
+	p.cash += cash
+}
+
+// WithdrawCash implements the withdrawing cash function.
+func (p *Portfolio) WithdrawCash(cash float64) (ok bool) {
+	// portfolio cash not allowed to go negative
+	if p.cash <= 0 {
+		return false
+	}
+	if cash < 0 {
+		return false
+	}
+	p.cash -= cash
+	return true
 }
 
 // Value return the current total value of the portfolio

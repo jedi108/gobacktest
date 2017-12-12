@@ -710,3 +710,84 @@ func TestPortfolioValue(t *testing.T) {
 		}
 	}
 }
+
+func TestPortfolioDepositCash(t *testing.T) {
+	var testCases = []struct {
+		msg          string
+		portfolio    PortfolioHandler
+		cash         float64
+		expPortfolio PortfolioHandler
+	}{
+		{"testing deposit to empty portfolio",
+			&Portfolio{},
+			1000,
+			&Portfolio{cash: 1000},
+		},
+		{"testing deposit to initialized portfolio",
+			&Portfolio{cash: 10000},
+			1000,
+			&Portfolio{cash: 11000},
+		},
+		{"testing deposit with negativ cash",
+			&Portfolio{cash: 1000},
+			-1000,
+			&Portfolio{cash: 1000},
+		},
+		{"testing deposit with decimal cash",
+			&Portfolio{cash: 100},
+			23.45,
+			&Portfolio{cash: 123.45},
+		},
+	}
+
+	for _, tc := range testCases {
+		tc.portfolio.DepositCash(tc.cash)
+		if tc.portfolio.Cash() != tc.expPortfolio.Cash() {
+			t.Errorf("%v DepositCash(%v): \nexpected %#v, \nactual %#v",
+				tc.msg, tc.cash, tc.expPortfolio.Cash(), tc.portfolio.Cash())
+		}
+	}
+}
+
+func TestPortfolioWithdrawCash(t *testing.T) {
+	var testCases = []struct {
+		msg          string
+		portfolio    PortfolioHandler
+		cash         float64
+		expOk        bool
+		expPortfolio PortfolioHandler
+	}{
+		{"testing withdraw from empty portfolio",
+			&Portfolio{},
+			1000,
+			false,
+			&Portfolio{cash: 0},
+		},
+		{"testing withdraw from initialized portfolio",
+			&Portfolio{cash: 1000},
+			1000,
+			true,
+			&Portfolio{cash: 0},
+		},
+		{"testing withdraw with negativ cash",
+			&Portfolio{cash: 1000},
+			-1000,
+			false,
+			&Portfolio{cash: 1000},
+		},
+		{"testing withdraw with decimal cash",
+			&Portfolio{cash: 123.45},
+			23.45,
+			true,
+			&Portfolio{cash: 100},
+		},
+	}
+
+	for _, tc := range testCases {
+		ok := tc.portfolio.WithdrawCash(tc.cash)
+		if (ok != tc.expOk) || (tc.portfolio.Cash() != tc.expPortfolio.Cash()) {
+			t.Errorf("%v WithdrawCash(%v): \nexpected %v %#v, \nactual %v %#v",
+				tc.msg, tc.cash, tc.expOk, tc.expPortfolio.Cash(), ok, tc.portfolio.Cash())
+		}
+	}
+}
