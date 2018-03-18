@@ -1,8 +1,8 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](/LICENSE.md)
-[![Travis](https://img.shields.io/travis/mamady/gobacktest.svg?style=flat-square)](https://travis-ci.org/Mamady/gobacktest)
-[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](http://godoc.org/github.com/Mamady/gobacktest)
-[![Coverage Status](https://img.shields.io/coveralls/mamady/gobacktest/master.svg?style=flat-square)](https://coveralls.io/github/Mamady/gobacktest?branch=master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/mamady/gobacktest?style=flat-square)](https://goreportcard.com/report/github.com/Mamady/gobacktest)
+[![Travis](https://img.shields.io/travis/mamady/gobacktest.svg?style=flat-square)](https://travis-ci.org/mamady/gobacktest)
+[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](http://godoc.org/github.com/mamady/gobacktest)
+[![Coverage Status](https://img.shields.io/coveralls/mamady/gobacktest/master.svg?style=flat-square)](https://coveralls.io/github/mamady/gobacktest?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mamady/gobacktest?style=flat-square)](https://goreportcard.com/report/github.com/mamady/gobacktest)
 
 ---
 
