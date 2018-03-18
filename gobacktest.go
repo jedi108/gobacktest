@@ -3,4 +3,4 @@
 // license that can be found in the LICENSE file.
 
 // Package gobacktest is a simple placeholder to root all gobacktest documentation
-package gobacktest // import "github.com/dirkolbrich/gobacktest"
+package gobacktest

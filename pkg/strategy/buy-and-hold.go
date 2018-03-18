@@ -3,7 +3,7 @@ package strategy
 import (
 	"fmt"
 
-	bt "github.com/dirkolbrich/gobacktest/pkg/backtest"
+	bt "github.com/mamady/gobacktest/pkg/backtest"
 )
 
 // BuyAndHold is a basic test strategy, which interprets the first DataEvent on a symbal

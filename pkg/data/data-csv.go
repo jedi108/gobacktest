@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dirkolbrich/gobacktest/pkg/backtest"
+	"github.com/mamady/gobacktest/pkg/backtest"
 )
 
 // BarEventFromCSVFile is a data struct, which loads the market data from csv files.

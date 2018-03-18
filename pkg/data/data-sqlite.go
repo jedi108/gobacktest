@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/dirkolbrich/gobacktest/pkg/backtest"
+	"github.com/mamady/gobacktest/pkg/backtest"
 )
 
 // BarEventFromSQLiteData is a data struct, which loads the market data from a SQLite database.

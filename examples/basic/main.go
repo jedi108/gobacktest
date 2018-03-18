@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/dirkolbrich/gobacktest/pkg/backtest"
-	"github.com/dirkolbrich/gobacktest/pkg/data"
-	"github.com/dirkolbrich/gobacktest/pkg/strategy"
+	"github.com/mamady/gobacktest/pkg/backtest"
+	"github.com/mamady/gobacktest/pkg/data"
+	"github.com/mamady/gobacktest/pkg/strategy"
 )
 
 func main() {

@@ -3,7 +3,7 @@ package strategy
 import (
 	"fmt"
 
-	bt "github.com/dirkolbrich/gobacktest/pkg/backtest"
+	bt "github.com/mamady/gobacktest/pkg/backtest"
 )
 
 // MovingAverageCross is a test strategy, which interprets the SMA on a series of data events

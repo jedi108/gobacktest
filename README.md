@@ -1,16 +1,14 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](/LICENSE.md)
-[![Travis](https://img.shields.io/travis/dirkolbrich/gobacktest.svg?style=flat-square)](https://travis-ci.org/dirkolbrich/gobacktest)
-[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](http://godoc.org/github.com/dirkolbrich/gobacktest)
-[![Coverage Status](https://img.shields.io/coveralls/dirkolbrich/gobacktest/master.svg?style=flat-square)](https://coveralls.io/github/dirkolbrich/gobacktest?branch=master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/dirkolbrich/gobacktest?style=flat-square)](https://goreportcard.com/report/github.com/dirkolbrich/gobacktest)
-
-_**Heads up:** This is a framework in development, with only basic functionality._
+[![Travis](https://img.shields.io/travis/mamady/gobacktest.svg?style=flat-square)](https://travis-ci.org/Mamady/gobacktest)
+[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](http://godoc.org/github.com/Mamady/gobacktest)
+[![Coverage Status](https://img.shields.io/coveralls/mamady/gobacktest/master.svg?style=flat-square)](https://coveralls.io/github/Mamady/gobacktest?branch=master)
+[![Go Report Card](https://goreportcard.com/badge/github.com/mamady/gobacktest?style=flat-square)](https://goreportcard.com/report/github.com/Mamady/gobacktest)
 
 ---
 
 # gobacktest - Fundamental stock analysis backtesting
 
-An event-driven backtesting framework to test stock trading strategies based on fundamental analysis. Preferably this package will be the core of a backend service exposed via a REST API.
+An event-driven backtesting framework to test trading strategies based on fundamental analysis.
 
 ## Usage
 
@@ -20,9 +18,9 @@ Example tests are in the `/examples` folder.
 package main
 
 import (
-    "github.com/dirkolbrich/gobacktest/pkg/backtest"
-    "github.com/dirkolbrich/gobacktest/pkg/data"
-    "github.com/dirkolbrich/gobacktest/pkg/strategy"
+    "github.com/mamady/gobacktest/pkg/backtest"
+    "github.com/mamady/gobacktest/pkg/data"
+    "github.com/mamady/gobacktest/pkg/strategy"
 )
 
 func main() {
