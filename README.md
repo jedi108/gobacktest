@@ -1,8 +1,8 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](/LICENSE.md)
 [![Travis](https://img.shields.io/travis/mamady/gobacktest.svg?style=flat-square)](https://travis-ci.org/mamady/gobacktest)
-[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](http://godoc.org/github.com/mamady/gobacktest)
+[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg?style=flat-square)](http://godoc.org/github.com/jedi108/gobacktest)
 [![Coverage Status](https://img.shields.io/coveralls/mamady/gobacktest/master.svg?style=flat-square)](https://coveralls.io/github/mamady/gobacktest?branch=master)
-[![Go Report Card](https://goreportcard.com/badge/github.com/mamady/gobacktest?style=flat-square)](https://goreportcard.com/report/github.com/mamady/gobacktest)
+[![Go Report Card](https://goreportcard.com/badge/github.com/jedi108/gobacktest?style=flat-square)](https://goreportcard.com/report/github.com/jedi108/gobacktest)
 
 ---
 
@@ -18,9 +18,9 @@ Example tests are in the `/examples` folder.
 package main
 
 import (
-    "github.com/mamady/gobacktest/pkg/backtest"
-    "github.com/mamady/gobacktest/pkg/data"
-    "github.com/mamady/gobacktest/pkg/strategy"
+    "github.com/jedi108/gobacktest/pkg/backtest"
+    "github.com/jedi108/gobacktest/pkg/data"
+    "github.com/jedi108/gobacktest/pkg/strategy"
 )
 
 func main() {

@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/mamady/gobacktest/pkg/backtest"
+	"github.com/jedi108/gobacktest/pkg/backtest"
 )
 
 func TestCreateBarEventFromLine(t *testing.T) {

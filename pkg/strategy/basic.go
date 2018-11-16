@@ -1,7 +1,7 @@
 package strategy
 
 import (
-	bt "github.com/mamady/gobacktest/pkg/backtest"
+	bt "github.com/jedi108/gobacktest/pkg/backtest"
 )
 
 // Basic is a basic test strategy, which interprets every DataEvent as a signal to buy

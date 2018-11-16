@@ -2,7 +2,7 @@ package backtest
 
 import (
 	// "fmt"
-	"github.com/mamady/gobacktest/pkg/utils"
+	"github.com/jedi108/gobacktest/pkg/utils"
 )
 
 // ExecutionHandler is the basic interface for executing orders
