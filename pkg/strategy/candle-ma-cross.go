@@ -3,6 +3,7 @@ package strategy
 import (
 	"fmt"
 	bt "github.com/jedi108/gobacktest/pkg/backtest"
+	"log"
 )
 
 // MovingAverageCross is a test strategy, which interprets the SMA on a series of data events
@@ -82,16 +83,36 @@ func shortMoreLong(smaShort, smaLong float64) bool {
 }
 
 func isAbsorptionPattern(da []bt.DataEventHandler) bool {
-	lendata := len(da)
-	if lendata < 2 {
+	lenData := len(da)
+	if lenData < 2 {
 		return false
 	}
+
+	first, last := da[lenData-2].(barses), da[lenData-1].(barses)
+
+	if !bullish(last) {
+		return false
+	}
+
+	if !bullishAbsorptionPattern(first, last) {
+		return false
+	}
+
 	return true
-	//bar := da[0]
-	//fmt.Print(len(da), " ")
-	//fmt.Print(bar.BarOpen(), " ")
-	//fmt.Print(bar.BarHigh(), " ")
-	//fmt.Print(bar.BarLow(), " ")
+}
+
+func bullishAbsorptionPattern(first, last barses) (result bool) {
+	result = last.BarOpen() <= first.BarClose() && last.BarClose() >= first.BarOpen()
+	if result {
+		log.Println("result true==============")
+		log.Printf("last.BarOpen %f <= %f first.BarClose", last.BarOpen(), first.BarClose())
+		log.Printf("last.BarClose %f >= %f first.BarOpen", last.BarClose(), first.BarOpen())
+	}
+	return result
+}
+
+func bullish(last barses) bool {
+	return last.BarOpen() < last.BarClose()
 }
 
 type barses interface {

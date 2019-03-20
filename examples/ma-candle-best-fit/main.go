@@ -19,8 +19,8 @@ type Result struct {
 
 func main() {
 	// create intervals for the short and long range
-	shortRange := linspace(2, 50, 2)
-	longRange := linspace(30, 100, 10)
+	shortRange := linspace(2, 30, 4)
+	longRange := linspace(50, 100, 4)
 	// create a slice for different test results
 	results := []Result{}
 	for _, short := range shortRange {
