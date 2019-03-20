@@ -19,8 +19,8 @@ type Result struct {
 
 func main() {
 	// create intervals for the short and long range
-	shortRange := linspace(3, 100, 20)
-	longRange := linspace(40, 200, 40)
+	shortRange := linspace(2, 50, 2)
+	longRange := linspace(30, 100, 10)
 	// create a slice for different test results
 	results := []Result{}
 	for _, short := range shortRange {
@@ -64,7 +64,7 @@ func main() {
 	// iterate over every field in the matrix
 	for i := range results {
 		// create strategy provider and load into the backtest
-		strategy := &strategy.MovingAverageCross{ShortWindow: results[i].smaShort, LongWindow: results[i].smaLong}
+		strategy := &strategy.MovingAverageCrossWithCandle{ShortWindow: results[i].smaShort, LongWindow: results[i].smaLong}
 		test.SetStrategy(strategy)
 
 		// run the backtest

@@ -49,6 +49,11 @@ type DataEventHandler interface {
 	EventHandler
 	IsDataEvent() bool
 	LatestPrice() float64
+
+	BarClose() float64
+	BarOpen() float64
+	BarHigh() float64
+	BarLow() float64
 }
 
 // DataEvent is the basic implementation of a data event handler.
@@ -87,6 +92,22 @@ func (b Bar) IsBar() bool {
 // LatestPrice returns the close proce of the bar event.
 func (b Bar) LatestPrice() float64 {
 	return b.Close
+}
+
+func (b Bar) BarClose() float64 {
+	return b.Close
+}
+
+func (b Bar) BarOpen() float64 {
+	return b.Open
+}
+
+func (b Bar) BarHigh() float64 {
+	return b.High
+}
+
+func (b Bar) BarLow() float64 {
+	return b.Low
 }
 
 // TickEvent declares a tick event interface.
