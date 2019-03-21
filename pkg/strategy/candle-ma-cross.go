@@ -44,13 +44,14 @@ func (s *MovingAverageCrossWithCandle) CalculateSignal(e bt.DataEventHandler, da
 			return se, fmt.Errorf("buy signal but already invested in %v, no signal created,", e.GetSymbol())
 		}
 
-		if IsSignal(smaShort, smaLong, invested, data.List(e.GetSymbol())) {
+		if IsSignalLong(smaShort, smaLong, invested, data.List(e.GetSymbol())) {
 			// buy signal, populate the signal event
 			se.Event = bt.Event{Timestamp: e.GetTime(), Symbol: e.GetSymbol()}
 			se.Direction = "long"
 		}
 
-		if (smaShort <= smaLong) && !invested {
+		if IsSignalLongExit(smaShort, smaLong, invested, data.List(e.GetSymbol())) {
+			//if (smaShort <= smaLong) && !invested {
 			return se, fmt.Errorf("sell signal but not invested in %v, no signal created,", e.GetSymbol())
 		}
 
@@ -64,16 +65,39 @@ func (s *MovingAverageCrossWithCandle) CalculateSignal(e bt.DataEventHandler, da
 	return se, nil
 }
 
-func IsSignal(smaShort, smaLong float64, invested bool, da []bt.DataEventHandler) (hasSignal bool) {
+func IsSignalLongExit(smaShort, smaLong float64, invested bool, da []bt.DataEventHandler) (hasSignal bool) {
+	if !invested {
+		return false
+	}
+
+	//if smaShort <= smaLong {
+	//	return true
+	//}
+
+	lenData := len(da)
+	if lenData < 2 {
+		return false
+	}
+
+	_, last := firstLast(lenData, da)
+
+	if !bullish(last) {
+		return true
+	}
+
+	return false
+}
+
+func IsSignalLong(smaShort, smaLong float64, invested bool, da []bt.DataEventHandler) (hasSignal bool) {
 	if invested {
 		return false
 	}
 
-	hasSignal = shortMoreLong(smaShort, smaLong)
-
-	if !hasSignal {
-		return false
-	}
+	//hasSignal = shortMoreLong(smaShort, smaLong)
+	//
+	//if !hasSignal {
+	//	return false
+	//}
 
 	return isAbsorptionPattern(da)
 }
@@ -82,17 +106,23 @@ func shortMoreLong(smaShort, smaLong float64) bool {
 	return smaShort > smaLong
 }
 
+func firstLast(lenData int, da []bt.DataEventHandler) (first barses, last barses) {
+	return da[lenData-2].(barses), da[lenData-1].(barses)
+}
+
 func isAbsorptionPattern(da []bt.DataEventHandler) bool {
 	lenData := len(da)
 	if lenData < 2 {
 		return false
 	}
 
-	first, last := da[lenData-2].(barses), da[lenData-1].(barses)
+	first, last := firstLast(lenData, da)
 
 	if !bullish(last) {
 		return false
 	}
+
+	return true
 
 	if !bullishAbsorptionPattern(first, last) {
 		return false
@@ -101,7 +131,17 @@ func isAbsorptionPattern(da []bt.DataEventHandler) bool {
 	return true
 }
 
+func bullish(last barses) bool {
+
+	return true
+
+	return last.BarOpen() < last.BarClose()
+}
+
 func bullishAbsorptionPattern(first, last barses) (result bool) {
+
+	return true
+
 	result = last.BarOpen() <= first.BarClose() && last.BarClose() >= first.BarOpen()
 	if result {
 		log.Println("result true==============")
@@ -109,10 +149,6 @@ func bullishAbsorptionPattern(first, last barses) (result bool) {
 		log.Printf("last.BarClose %f >= %f first.BarOpen", last.BarClose(), first.BarOpen())
 	}
 	return result
-}
-
-func bullish(last barses) bool {
-	return last.BarOpen() < last.BarClose()
 }
 
 type barses interface {

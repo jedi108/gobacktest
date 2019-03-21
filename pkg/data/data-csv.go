@@ -64,7 +64,7 @@ func (d *BarEventFromCSVFile) Load(symbols []string) (err error) {
 			if err != nil {
 				// what happens if line could not be parsed - needs logging
 				// log.Println(line)
-				// log.Println(err)
+				log.Fatalf("data.Load createBarEventFromLine %v", err)
 				continue
 			}
 			// append event to data stream
@@ -142,10 +142,15 @@ func readCSVFile(path string) (lines []map[string]string, err error) {
 	return lines, nil
 }
 
+const (
+	yyyymmdd = "2006-01-02"
+	ddmmyyyy = "02-01-2006"
+)
+
 // createBarEventFromLine takes a key/value map and a string and builds a bar struct
 func createBarEventFromLine(line map[string]string, symbol string) (bar *backtest.Bar, err error) {
 	// parse each string in line to corresponding record value
-	date, err := time.Parse("2006-01-02", line["Date"])
+	date, err := time.Parse(ddmmyyyy, line["Date"])
 	if err != nil {
 		return bar, err
 	}
@@ -170,14 +175,17 @@ func createBarEventFromLine(line map[string]string, symbol string) (bar *backtes
 		return bar, err
 	}
 
-	adjClosePrice, err := strconv.ParseFloat(line["Adj Close"], 64)
+	//adjClosePrice, err := strconv.ParseFloat(line["Adj Close"], 64)
+	//if err != nil {
+	//	return bar, err
+	//}
+
+	volumeFLoat, err := strconv.ParseFloat(line["Volume"], 64)
 	if err != nil {
 		return bar, err
 	}
-	volume, err := strconv.ParseInt(line["Volume"], 10, 64)
-	if err != nil {
-		return bar, err
-	}
+
+	volume := int64(volumeFLoat)
 
 	// create and populate new event
 	bar = &backtest.Bar{
@@ -187,8 +195,8 @@ func createBarEventFromLine(line map[string]string, symbol string) (bar *backtes
 		High:      highPrice,
 		Low:       lowPrice,
 		Close:     closePrice,
-		AdjClose:  adjClosePrice,
-		Volume:    volume,
+		//AdjClose:  adjClosePrice,
+		Volume: volume,
 	}
 
 	return bar, nil

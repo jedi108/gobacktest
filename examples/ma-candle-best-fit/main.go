@@ -19,8 +19,8 @@ type Result struct {
 
 func main() {
 	// create intervals for the short and long range
-	shortRange := linspace(2, 30, 4)
-	longRange := linspace(50, 100, 4)
+	shortRange := linspace(2, 202, 200/2)
+	longRange := linspace(2, 202, 200/2)
 	// create a slice for different test results
 	results := []Result{}
 	for _, short := range shortRange {
@@ -30,8 +30,9 @@ func main() {
 	}
 
 	// define symbols
-	var symbols = []string{"SDF.DE"}
-	// initiate new backtester and load symbols
+	//var symbols = []string{"poloniexBTC_ETH_2month_1800.DE"}
+	var symbols = []string{"finamLKOH_8month_86400"}
+	//initiate new backtester and load symbols
 	test := backtest.New()
 	test.SetSymbols(symbols)
 
